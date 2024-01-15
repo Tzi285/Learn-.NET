@@ -1,1 +1,2 @@
-# learn
+# LEARN
+Respository for study
