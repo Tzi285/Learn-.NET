@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Gj0CLDXIIpncp9zQRt5DIPRsuJSL5xo7HyPN7D+BjgY=",
+  "Hash": "Ui3nQVmT75K/mFuruEonmnT+UuHNElcHpkrGI2YFBds=",
   "Source": "ContosoCrafts.WebSite",
   "BasePath": "_content/ContosoCrafts.WebSite",
   "Mode": "Default",
@@ -66,6 +66,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "E:\\BKAV\\Code\\Learn-.NET\\ContosoCrafts.WebSite\\wwwroot\\data\\Products.json",
+      "SourceId": "ContosoCrafts.WebSite",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\BKAV\\Code\\Learn-.NET\\ContosoCrafts.WebSite\\wwwroot\\",
+      "BasePath": "_content/ContosoCrafts.WebSite",
+      "RelativePath": "data/Products.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\data\\Products.json"
     },
     {
       "Identity": "E:\\BKAV\\Code\\Learn-.NET\\ContosoCrafts.WebSite\\wwwroot\\favicon.ico",

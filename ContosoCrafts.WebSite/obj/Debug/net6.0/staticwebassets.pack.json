@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "E:\\BKAV\\Code\\Learn-.NET\\ContosoCrafts.WebSite\\wwwroot\\data\\Products.json",
+      "PackagePath": "staticwebassets\\data\\Products.json"
+    },
+    {
       "Id": "E:\\BKAV\\Code\\Learn-.NET\\ContosoCrafts.WebSite\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
