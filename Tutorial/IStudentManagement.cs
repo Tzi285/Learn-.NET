@@ -13,5 +13,6 @@ namespace Tutorial
         Student UpdateStudentById(int id);
         void DeleteStudentById(int id);
         List<Student> GetListStudents();
+        void SearchStudentById(int id);
     }
 }

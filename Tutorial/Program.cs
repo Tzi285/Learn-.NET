@@ -24,7 +24,7 @@ internal class Program
             Program.Display();
             Console.Write("Please enter option: ");
             int option = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("");
+            Console.WriteLine();
             switch (option)
             {
                 case 0:
@@ -53,15 +53,21 @@ internal class Program
                     break;
                 case 4:
                     stCtrl.DisplayListStudent(stCtrl.GetListStudents());
-                    Console.WriteLine("");
+                    Console.WriteLine();
                     Console.Write("Enter Id of Student you want to delete: ");
                     int deleteId = Convert.ToInt32(Console.ReadLine());
 
                     stCtrl.DeleteStudentById(deleteId);
 
-                    Console.WriteLine("");
+                    Console.WriteLine();
                     break;
                 case 5:
+                    Console.Write("Enter Id of Student you want to search: ");
+                    int searchId = Convert.ToInt32(Console.ReadLine());
+
+                    stCtrl.SearchStudentById(searchId);
+
+                    Console.WriteLine();
                     break;
                 case 6:
                     break;

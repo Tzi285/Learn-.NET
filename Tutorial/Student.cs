@@ -16,5 +16,9 @@ namespace Tutorial
         public double Physics { get; set; }
         public double Chemistry { get; set; }
         public double Biology { get; set; }
+        public override string ToString()
+        {
+            return $"{ID,-5} {Name,-15} {Gender,-7} {Age,5} {Math,5} {Physics,7} {Chemistry,7} {Biology,7}";
+        }
     }
 }

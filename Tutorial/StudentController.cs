@@ -175,8 +175,36 @@ namespace Tutorial
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Delete student failed");
+                    Console.ResetColor();
                 }
+            }
+        }
+        //Search student
+        public void SearchStudentById(int id)
+        {
+            Student existSt = ListStudent.Find(student => student.ID == id);
+
+            if (existSt != null && ListStudent.Count > 0)
+            {
+                foreach (Student st in ListStudent)
+                {
+                    if(st.ID == existSt.ID)
+                    {
+                        Console.WriteLine("{0, -5} {1, -15} {2, -7} {3, 5} {4, 5} {5, 7} {6, 7} {7, 7}",
+                              "ID", "Name", "Gender", "Age", "Math", "Physics", "Chemistry", "Biology");
+
+                        Console.WriteLine("{0, -5} {1, -15} {2, -7} {3, 5} {4, 5} {5, 6} {6, 7} {7, 7}",
+                                          st.ID, FirstLetterToUpper(st.Name), FirstLetterToUpper(st.Gender), st.Age, st.Math, st.Physics, st.Chemistry, st.Biology);
+                    }
+                }
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Student doesn't exist.");
+                Console.ResetColor();
             }
         }
         //Id auto increase
@@ -198,7 +226,7 @@ namespace Tutorial
             return max;
         }
         //Check gender valid
-        public bool IsGenderValid(string gender)
+        public bool IsGenderValid(string gender)    
         {
             string lowerCaseGender = gender.ToLower();
 
