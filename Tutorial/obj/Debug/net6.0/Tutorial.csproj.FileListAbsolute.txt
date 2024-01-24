@@ -1,0 +1,15 @@
+E:\BKAV\Code\Learn-.NET\Tutorial\bin\Debug\net6.0\Tutorial.exe
+E:\BKAV\Code\Learn-.NET\Tutorial\bin\Debug\net6.0\Tutorial.deps.json
+E:\BKAV\Code\Learn-.NET\Tutorial\bin\Debug\net6.0\Tutorial.runtimeconfig.json
+E:\BKAV\Code\Learn-.NET\Tutorial\bin\Debug\net6.0\Tutorial.dll
+E:\BKAV\Code\Learn-.NET\Tutorial\bin\Debug\net6.0\Tutorial.pdb
+E:\BKAV\Code\Learn-.NET\Tutorial\obj\Debug\net6.0\Tutorial.csproj.AssemblyReference.cache
+E:\BKAV\Code\Learn-.NET\Tutorial\obj\Debug\net6.0\Tutorial.GeneratedMSBuildEditorConfig.editorconfig
+E:\BKAV\Code\Learn-.NET\Tutorial\obj\Debug\net6.0\Tutorial.AssemblyInfoInputs.cache
+E:\BKAV\Code\Learn-.NET\Tutorial\obj\Debug\net6.0\Tutorial.AssemblyInfo.cs
+E:\BKAV\Code\Learn-.NET\Tutorial\obj\Debug\net6.0\Tutorial.csproj.CoreCompileInputs.cache
+E:\BKAV\Code\Learn-.NET\Tutorial\obj\Debug\net6.0\Tutorial.dll
+E:\BKAV\Code\Learn-.NET\Tutorial\obj\Debug\net6.0\refint\Tutorial.dll
+E:\BKAV\Code\Learn-.NET\Tutorial\obj\Debug\net6.0\Tutorial.pdb
+E:\BKAV\Code\Learn-.NET\Tutorial\obj\Debug\net6.0\Tutorial.genruntimeconfig.cache
+E:\BKAV\Code\Learn-.NET\Tutorial\obj\Debug\net6.0\ref\Tutorial.dll

@@ -1,43 +1,37 @@
-﻿using ContosoCrafts.WebSite.Models;
+﻿using System.Collections.Generic;
+using ContosoCrafts.WebSite.Models;
 using ContosoCrafts.WebSite.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContosoCrafts.WebSite.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
-    public class ProductsController : Controller
+    [Route("[controller]")]
+    public class ProductsController : ControllerBase
     {
+        public ProductsController(JsonFileProductService productService) =>
+            ProductService = productService;
 
-        public ProductsController(JsonFileProductService productService)
-        {
-             this.ProductService = productService;
-        }
-        public JsonFileProductService ProductService { get;}
+        public JsonFileProductService ProductService { get; }
+
         [HttpGet]
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<Product> Get() => ProductService.GetProducts();
+
+        [HttpPatch]
+        public ActionResult Patch([FromBody] RatingRequest request)
         {
-            return ProductService.GetProducts();
-        } 
-        public void AddRating(string productId, int rating)
+            if (request?.ProductId == null)
+                return BadRequest();
+
+            ProductService.AddRating(request.ProductId, request.Rating);
+
+            return Ok();
+        }
+
+        public class RatingRequest
         {
-            var products = GetProducts();
-            //LINQ 
-            var query = products.First(x => x.Id == productId);
-            if(query.Ratings == null)
-            {
-                query.Ratings = new int[] { rating };
-            }
-            else
-            {
-                var ratings = query.Ratings.ToList();
-                ratings.Add(rating);
-                query.Ratings = ratings.ToArray();
-                using (var ouputStream = File.OpenWrite(JsonFileName))
-                { 
-                
-                }
-            }
+            public string? ProductId { get; set; }
+            public int Rating { get; set; }
         }
     }
 }
