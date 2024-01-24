@@ -36,12 +36,30 @@ internal class Program
                     break;
                 case 2:
                     stCtrl.AddStudent();
+
                     Console.WriteLine("Add student successfully.");
                     Console.WriteLine("");
                     break;
                 case 3:
+                    stCtrl.DisplayListStudent(stCtrl.GetListStudents());
+                    Console.WriteLine("");
+                    Console.Write("Enter Id of Student you want to update infomation: ");
+                    int updateId = Convert.ToInt32(Console.ReadLine());
+
+                    stCtrl.UpdateStudentById(updateId);
+
+                    Console.WriteLine("Update student successfully.");
+                    Console.WriteLine("");
                     break;
                 case 4:
+                    stCtrl.DisplayListStudent(stCtrl.GetListStudents());
+                    Console.WriteLine("");
+                    Console.Write("Enter Id of Student you want to delete: ");
+                    int deleteId = Convert.ToInt32(Console.ReadLine());
+
+                    stCtrl.DeleteStudentById(deleteId);
+
+                    Console.WriteLine("");
                     break;
                 case 5:
                     break;

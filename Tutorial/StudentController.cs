@@ -6,14 +6,180 @@ using System.Threading.Tasks;
 
 namespace Tutorial
 {
-    internal class StudentController : Student
+    internal class StudentController : IStudentManagement
     {
         private List<Student> ListStudent = new List<Student>();
         public StudentController()
         {
-            ListStudent.Add(new Student { ID = GenerateID(), Name = "Linh", Gender = "Male", Age = 18, Math = 9.5, Physics = 7.0, Chemistry = 8.0, Biology = 7.5 });
-            ListStudent.Add(new Student { ID = GenerateID(), Name = "Chiến", Gender = "Female", Age = 20, Math = 8.0, Physics = 5.6, Chemistry = 9.0, Biology = 8.5 });
+            ListStudent.Add(new Student { ID = GenerateID(), Name = "Reto", Gender = "Male", Age = 18, Math = 9.5, Physics = 7.0, Chemistry = 8.0, Biology = 7.5 });
+            ListStudent.Add(new Student { ID = GenerateID(), Name = "Lind", Gender = "Female", Age = 20, Math = 8.0, Physics = 5.6, Chemistry = 9.0, Biology = 8.5 });
+            ListStudent.Add(new Student { ID = GenerateID(), Name = "Alice", Gender = "Female", Age = 21, Math = 7.5, Physics = 8.0, Chemistry = 9.5, Biology = 8.0 });
+            ListStudent.Add(new Student { ID = GenerateID(), Name = "Bob", Gender = "Male", Age = 19, Math = 8.5, Physics = 7.0, Chemistry = 8.5, Biology = 7.0 });
+            ListStudent.Add(new Student { ID = GenerateID(), Name = "Cathy", Gender = "Female", Age = 22, Math = 9.0, Physics = 6.5, Chemistry = 7.5, Biology = 8.5 });
+            ListStudent.Add(new Student { ID = GenerateID(), Name = "David", Gender = "Male", Age = 20, Math = 7.0, Physics = 8.5, Chemistry = 9.0, Biology = 6.5 });
+            ListStudent.Add(new Student { ID = GenerateID(), Name = "Emily", Gender = "Female", Age = 23, Math = 8.0, Physics = 7.5, Chemistry = 8.0, Biology = 9.0 });
         }
+        //Create new student
+        public void AddStudent()
+        {
+            Student st = new Student();
+            st.ID = GenerateID();
+            
+            //Name
+            Console.WriteLine("Enter name of student: ");
+            st.Name = Console.ReadLine();
+            while (string.IsNullOrEmpty(st.Name))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid name. Please enter name again.");
+                Console.ResetColor();
+                st.Name = Console.ReadLine();
+            }
+
+            //Gender
+            Console.WriteLine("Enter gender: ");
+            st.Gender = Console.ReadLine();
+            while (string.IsNullOrEmpty(st.Gender) || !IsGenderValid(st.Gender))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid gender. Please enter either 'Male' or 'Female'.");
+                Console.ResetColor();
+                st.Gender = Console.ReadLine();
+            }
+            //Age
+            Console.WriteLine("Enter student age:");
+            int tempAge;
+            while (!int.TryParse(Console.ReadLine(), out tempAge) || tempAge < 11 || tempAge > 50)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid age. Please enter age again.");
+                Console.ResetColor();
+            }
+            st.Age = tempAge;
+            // Math, Physics, Chemistry, Biology Scores
+            st.Math = GetValidScore("Math");
+            st.Physics = GetValidScore("Physics");
+            st.Chemistry = GetValidScore("Chemistry");
+            st.Biology = GetValidScore("Biology");
+
+            ListStudent.Add(st);
+        }
+        //Update student infomation
+        public Student UpdateStudentById(int id)
+        {
+            Student existSt = ListStudent.Find(student => student.ID == id);
+
+            if(existSt != null)
+            {
+                Console.WriteLine("Updating student with\r\n" +
+                    $"ID: {existSt.ID}\r\n"+
+                    $"Name: {existSt.Name}\r\n" +
+                    $"Gender: {existSt.Gender}\r\n" +
+                    $"Age: {existSt.Age}"
+                    );
+
+                Console.WriteLine("Enter updated name (or press Enter to keep current): ");
+                string updatedName = Console.ReadLine();
+                if (!string.IsNullOrEmpty(updatedName))
+                {
+                    existSt.Name = updatedName;
+                }
+
+                Console.WriteLine("Enter updated gender (or press Enter to keep current): ");
+                string updatedGender = Console.ReadLine();
+                while(string.IsNullOrEmpty(updatedGender) || !IsGenderValid(updatedGender))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid gender. Please enter either 'Male' or 'Female'.");
+                    Console.ResetColor();
+                    updatedGender = Console.ReadLine();
+                }
+                if (!string.IsNullOrEmpty(updatedGender))
+                {
+                    existSt.Gender = updatedGender;
+                }
+                Console.WriteLine("Enter updated age (or press Enter to keep current): ");
+                string ageInput = Console.ReadLine();
+                if (!string.IsNullOrEmpty(ageInput))
+                {
+                    if (int.TryParse(ageInput, out int updatedAge) && updatedAge >= 11 && updatedAge <= 50)
+                    {
+                        existSt.Age = updatedAge;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid age input. Age not updated.");
+                        Console.ResetColor();
+                    }
+                }
+                return existSt;
+            }
+            else
+            {
+                Console.WriteLine("Student isn't exist.");
+                return null;
+            }
+
+        }
+        //List students
+        public void DisplayListStudent(List<Student> listSt)
+        {
+            Console.WriteLine("{0, -5} {1, -15} {2, -7} {3, 5} {4, 5} {5, 7} {6, 7} {7, 7}",
+                  "ID", "Name", "Gender", "Age", "Math", "Physics", "Chemistry", "Biology");
+
+            if (listSt != null && listSt.Count > 0)
+            {
+                foreach (Student st in listSt)
+                {
+                    Console.WriteLine("{0, -5} {1, -15} {2, -7} {3, 5} {4, 5} {5, 6} {6, 7} {7, 7}",
+                                      st.ID, FirstLetterToUpper(st.Name), FirstLetterToUpper(st.Gender), st.Age, st.Math, st.Physics, st.Chemistry, st.Biology);
+                }
+            }
+            Console.WriteLine();
+        }
+        public List<Student> GetListStudents()
+        {
+            return ListStudent;
+        }
+        //First char upper
+        public string FirstLetterToUpper(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return input;
+            }
+
+            return char.ToUpper(input[0]) + input.Substring(1);
+        }
+        //Delete student
+        public void DeleteStudentById(int id)
+        {
+            Student existSt = ListStudent.Find(student => student.ID == id);
+
+            if (existSt != null)
+            {
+                Console.WriteLine("Are you sure to delete this student(Enter Yes / No): ");
+                string yn = Console.ReadLine();
+                while (string.IsNullOrEmpty(yn) || !IsYesNoValid(yn))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid confirmation. Please enter again.");
+                    Console.ResetColor();
+                    yn = Console.ReadLine();
+                }
+                if( yn.ToLower() == "yes")
+                {
+                    ListStudent.Remove(existSt);
+                    Console.WriteLine("Delete student successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Delete student failed");
+                }
+            }
+        }
+        //Id auto increase
         public int GenerateID()
         {
             int max = 1;
@@ -31,79 +197,22 @@ namespace Tutorial
             }
             return max;
         }
+        //Check gender valid
         public bool IsGenderValid(string gender)
         {
             string lowerCaseGender = gender.ToLower();
 
             return lowerCaseGender == "male" || lowerCaseGender == "female";
         }
-        public void AddStudent()
+        //Check score valid
+        public double GetValidScore(string subject)
         {
-            Student st = new Student();
-            st.ID = GenerateID();
-            
-            //Name
-            Console.WriteLine("Enter name of student: ");
-
-            while(true)
-            {
-                st.Name = Convert.ToString(Console.ReadLine());
-                if(st.Name != null)
-                {
-                    Console.WriteLine("Name is valid.");
-                    break;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid name. Please enter name again.");
-                    Console.ResetColor();
-                }
-            }
-            
-            //Gender
-            Console.WriteLine("Enter gender: ");
+            double score;
 
             while (true)
             {
-                st.Gender = Convert.ToString(Console.ReadLine());
-                if (!string.IsNullOrEmpty(st.Gender) && IsGenderValid(st.Gender))
-                {
-                    Console.WriteLine("Gender is valid.");
-                    break;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid gender. Please enter either 'Male' or 'Female'.");
-                    Console.ResetColor();
-                }
-            }
-            //Age
-            Console.WriteLine("Enter student age:");
-
-            while (true)
-            {
-                st.Age = Convert.ToInt32(Console.ReadLine());
-                if (st.Age >= 11 && st.Age <= 50)
-                {
-                    Console.WriteLine("Age is valid.");
-                    break;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid age. Please enter age again.");
-                    Console.ResetColor();
-                }
-            }
-            //Math Score 
-            Console.WriteLine("Enter student Math score: ");
-
-            while (true)
-            {
-                st.Math = Convert.ToDouble(Console.ReadLine());
-                if (st.Math >= 0 && st.Math <= 10)
+                Console.WriteLine($"Enter student {subject} score: ");
+                if (double.TryParse(Console.ReadLine(), out score) && score >= 0 && score <= 10)
                 {
                     Console.WriteLine("Score is valid.");
                     break;
@@ -115,83 +224,14 @@ namespace Tutorial
                     Console.ResetColor();
                 }
             }
-            //Physics Score
-            Console.WriteLine("Enter student Physics score: ");
-
-            while (true)
-            {
-                st.Physics = Convert.ToDouble(Console.ReadLine());
-                if (st.Physics >= 0 && st.Physics<= 10)
-                {
-                    Console.WriteLine("Score is valid.");
-                    break;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid score. Please enter score again.");
-                    Console.ResetColor();
-                }
-            }
-            //Chemistry Score
-            Console.WriteLine("Enter student Chemistry score: ");
-
-            while (true)
-            {
-                st.Chemistry = Convert.ToDouble(Console.ReadLine());
-                if (st.Chemistry >= 0 && st.Chemistry <= 10)
-                {
-                    Console.WriteLine("Score is valid.");
-                    break;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid score. Please enter score again.");
-                    Console.ResetColor();
-                }
-            }
-            //Biology Score
-            Console.WriteLine("Enter student Biology score: ");
-
-            while (true)
-            {
-                st.Biology = Convert.ToDouble(Console.ReadLine());
-                if (st.Biology >= 0 && st.Biology <= 10)
-                {
-                    Console.WriteLine("Score is valid.");
-                    break;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid score. Please enter score again.");
-                    Console.ResetColor();
-                }
-            }
-
-            ListStudent.Add(st);
+            return score;
         }
-
-        public void DisplayListStudent(List<Student> listSt)
+        //Check Yes/No
+        public bool IsYesNoValid(string str)
         {
-            Console.WriteLine("{0, -5} {1, -15} {2, -7} {3, 5} {4, 5} {5, 7} {6, 7} {7, 7}",
-                  "ID", "Name", "Gender", "Age", "Math", "Physics","Chemistry", "Biology");
+            string lowerCaseGender = str.ToLower();
 
-            if (listSt != null && listSt.Count > 0)
-            {
-                foreach (Student st in listSt)
-                {
-                    Console.WriteLine("{0, -5} {1, -15} {2, -7} {3, 5} {4, 5} {5, 6} {6, 7} {7, 7}",
-                                      st.ID, st.Name, st.Gender, st.Age, st.Math, st.Physics, st.Chemistry, st.Biology);
-                }
-            }
-            Console.WriteLine();
-        }
-
-        public List<Student> GetListStudents() 
-        {
-            return ListStudent;
+            return lowerCaseGender == "yes" || lowerCaseGender == "no";
         }
     }
 }
