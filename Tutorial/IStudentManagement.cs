@@ -16,5 +16,7 @@ namespace Tutorial
         void SearchStudentById(int id);
         List<Student> SearchStudentByName(string? name);
         void DisplaySearchResults(List<Student> students);
+
+        void CalculateAverageById(int id);
     }
 }

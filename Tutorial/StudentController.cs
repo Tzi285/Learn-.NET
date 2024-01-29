@@ -208,7 +208,7 @@ namespace Tutorial
             }
         }
         //Search student by name
-        public List<Student> SearchStudentByName(string? name)
+        public List<Student> SearchStudentByName(string name)
         {
             string lowerCaseName = name.ToLower();
             
@@ -244,6 +244,10 @@ namespace Tutorial
                 Console.WriteLine("No students found with the given name.");
                 Console.ResetColor();
             }
+        }
+        //Calculate average student by id
+        public void CalculateAverageById(int id)
+        {
         }
         //Id auto increase
         public int GenerateID()

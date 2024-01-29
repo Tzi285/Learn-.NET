@@ -78,7 +78,14 @@ internal class Program
                     Console.WriteLine();
                     break;
                 case 7:
+                    stCtrl.DisplayListStudent(stCtrl.GetListStudents());
+                    Console.WriteLine();
+                    Console.Write("Enter Id of Student you want to cal: ");
+                    int calId = Convert.ToInt32(Console.ReadLine());
 
+                    stCtrl.CalculateAverageById(calId);
+
+                    Console.WriteLine();
                     break;
                 default:
                     Console.WriteLine("Invalid option. Please choose again.");
