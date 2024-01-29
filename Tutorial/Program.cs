@@ -10,8 +10,8 @@ internal class Program
             "2. Add student.\r\n" +
             "3. Update student infomation by ID.\r\n" +
             "4. Delete student by ID.\r\n" +
-            "5. Search student by name.\r\n" +
-            "6. Sort students by name.\r\n" +
+            "5. Search student by id.\r\n" +
+            "6. Search student by id.\r\n" +
             "7. Calculate test average and academic performance.\r\n" +
             "0. Out program");
     }
@@ -70,8 +70,15 @@ internal class Program
                     Console.WriteLine();
                     break;
                 case 6:
+                    Console.Write("Enter name or char of Student you want to search: ");
+                    string? searchName = Console.ReadLine();
+
+                    stCtrl.DisplaySearchResults(stCtrl.SearchStudentByName(searchName));
+                    
+                    Console.WriteLine();
                     break;
                 case 7:
+
                     break;
                 default:
                     Console.WriteLine("Invalid option. Please choose again.");

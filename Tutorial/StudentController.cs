@@ -181,7 +181,7 @@ namespace Tutorial
                 }
             }
         }
-        //Search student
+        //Search student by id
         public void SearchStudentById(int id)
         {
             Student existSt = ListStudent.Find(student => student.ID == id);
@@ -204,6 +204,44 @@ namespace Tutorial
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Student doesn't exist.");
+                Console.ResetColor();
+            }
+        }
+        //Search student by name
+        public List<Student> SearchStudentByName(string? name)
+        {
+            string lowerCaseName = name.ToLower();
+            
+            List<Student> foundStudents = new List<Student>();
+
+            foreach (var student in ListStudent)
+            {
+                string lowerCaseStudentName = student.Name.ToLower();
+
+                if (lowerCaseStudentName.Contains(lowerCaseName))
+                {
+                    foundStudents.Add(student);
+                }
+            }
+            return foundStudents;
+        }
+        //Display list student
+        public void DisplaySearchResults(List<Student> students)
+        {
+            if (students.Count > 0)
+            {
+                Console.WriteLine("{0, -5} {1, -15} {2, -7} {3, 5} {4, 5} {5, 7} {6, 7} {7, 7}",
+                    "ID", "Name", "Gender", "Age", "Math", "Physics", "Chemistry", "Biology");
+                foreach (Student student in students)
+                {
+                    Console.WriteLine("{0, -5} {1, -15} {2, -7} {3, 5} {4, 5} {5, 6} {6, 7} {7, 7}",
+                        student.ID, FirstLetterToUpper(student.Name), FirstLetterToUpper(student.Gender), student.Age, student.Math, student.Physics, student.Chemistry, student.Biology);
+                }
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("No students found with the given name.");
                 Console.ResetColor();
             }
         }

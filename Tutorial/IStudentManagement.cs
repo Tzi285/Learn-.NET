@@ -14,5 +14,7 @@ namespace Tutorial
         void DeleteStudentById(int id);
         List<Student> GetListStudents();
         void SearchStudentById(int id);
+        List<Student> SearchStudentByName(string? name);
+        void DisplaySearchResults(List<Student> students);
     }
 }
