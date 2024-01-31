@@ -15,9 +15,9 @@ namespace Tutorial
             ListStudent.Add(new Student { ID = GenerateID(), Name = "Lind", Gender = "Female", Age = 20, Math = 8.0, Physics = 5.6, Chemistry = 9.0, Biology = 8.5 });
             ListStudent.Add(new Student { ID = GenerateID(), Name = "Alice", Gender = "Female", Age = 21, Math = 7.5, Physics = 8.0, Chemistry = 9.5, Biology = 8.0 });
             ListStudent.Add(new Student { ID = GenerateID(), Name = "Bob", Gender = "Male", Age = 19, Math = 8.5, Physics = 7.0, Chemistry = 8.5, Biology = 7.0 });
-            ListStudent.Add(new Student { ID = GenerateID(), Name = "Cathy", Gender = "Female", Age = 22, Math = 9.0, Physics = 6.5, Chemistry = 7.5, Biology = 8.5 });
+            ListStudent.Add(new Student { ID = GenerateID(), Name = "Cathy", Gender = "Female", Age = 22, Math = 4.0, Physics = 6.5, Chemistry = 7.5, Biology = 8.5 });
             ListStudent.Add(new Student { ID = GenerateID(), Name = "David", Gender = "Male", Age = 20, Math = 7.0, Physics = 8.5, Chemistry = 9.0, Biology = 6.5 });
-            ListStudent.Add(new Student { ID = GenerateID(), Name = "Emily", Gender = "Female", Age = 23, Math = 8.0, Physics = 7.5, Chemistry = 8.0, Biology = 9.0 });
+            ListStudent.Add(new Student { ID = GenerateID(), Name = "Emily", Gender = "Female", Age = 23, Math = 8.0, Physics = 7.5, Chemistry = 5.0, Biology = 9.0 });
         }
         //Create new student
         public void AddStudent()
@@ -248,6 +248,38 @@ namespace Tutorial
         //Calculate average student by id
         public void CalculateAverageById(int id)
         {
+            Student existSt = ListStudent.Find(student => student.ID == id);
+
+            if (existSt != null && ListStudent.Count > 0)
+            {
+                foreach (Student st in ListStudent)
+                {
+                    if (st.ID == existSt.ID)
+                    {
+                        double avg = (st.Math + st.Physics + st.Chemistry + st.Biology) / 4;
+                        string aca;
+                        if (avg < 3.5) aca = "Weak";
+                        else if (avg < 5) aca = "Poor";
+                        else if (avg < 6) aca = "Average";
+                        else if (avg < 7) aca = "Fairly Good";
+                        else if (avg < 8.5) aca = "Good";
+                        else aca = "Excellent";
+
+                        Console.WriteLine("{0, -5} {1, -15} {2, 5} {3, 7} {4, 9} {5, 8} {6, 8} {7, 9}",
+                                          "ID", "Name", "Math", "Physics", "Chemistry", "Biology", "Average", "Academic");
+
+                        Console.WriteLine("{0, -5} {1, -15} {2, 5} {3, 7} {4, 9} {5, 8} {6, 8} {7, 9}",
+                                          st.ID, FirstLetterToUpper(st.Name), st.Math, st.Physics, st.Chemistry, st.Biology, avg, aca);
+
+                    }
+                }
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Student doesn't exist.");
+                Console.ResetColor();
+            }
         }
         //Id auto increase
         public int GenerateID()

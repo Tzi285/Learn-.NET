@@ -12,7 +12,7 @@ internal class Program
             "4. Delete student by ID.\r\n" +
             "5. Search student by id.\r\n" +
             "6. Search student by id.\r\n" +
-            "7. Calculate test average and academic performance.\r\n" +
+            "7. Calculate test average and academic achievement.\r\n" +
             "0. Out program");
     }
 
